@@ -1,0 +1,22 @@
+{
+  "python.formatting.provider": "black",
+  "python.analysis.typeCheckingMode": "basic",
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": [
+    "--ignore=E226,E302,E203,E41,W503,E731",
+    "--max-line-length=120",
+    "--exclude=test/*",
+    "--max-complexity=10"
+  ],
+  "python.linting.mypyEnabled": false,
+  "python.testing.pytestArgs": ["tests"],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+  "cSpell.words": [
+    "aiohttp",
+    "openai",
+    "pydantic",
+    "sess",
+    "tiktoken"
+  ]
+}

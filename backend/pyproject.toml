@@ -1,0 +1,63 @@
+[tool.poetry]
+name = "chat"
+version = "0.0.0"
+authors = []
+description = ""
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pydantic = {extras = ["dotenv"], version = "^1.10.5"}
+openai = "^0.27.0"
+tiktoken = "^0.2.0"
+aiohttp = "^3.8.4"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.1"
+pytest-cov = "^4.0.0"
+pytest-asyncio = "^0.20.3"
+pyright = "^1.1.296"
+black = "^23.1.0"
+flake8 = "^6.0.0"
+isort = "^5.12.0"
+poethepoet = "^0.18.1"
+pyproject-flake8 = "^6.0.0.post1"
+notebook = "^6.5.2"
+
+[tool.poe.tasks]
+fmt = { shell = "isort src tests; black src tests" }
+lint = { shell = "pflake8 src tests && pyright src tests && black src tests --check && isort src tests --check-only" }
+test = { shell = "pytest && rm .coverage" }
+test-s = { shell = "pytest -s && rm .coverage" }
+
+[tool.pyright]
+pythonVersion = "3.10"
+
+[tool.flake8]
+max-line-length = 120
+ignore = "E226,E302,E203,E41,W503,E722,E731"
+max-complexity = 10
+
+[tool.black]
+line-length = 120
+exclude = '''
+(
+  .mypy_cache
+  | .pytest_cache
+  | .tox
+  | .venv
+  | dist
+)
+'''
+# experimental-string-processing = true
+
+[tool.isort]
+line_length = 120
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = "--cov=src --cov-report=term-missing:skip-covered --cov-report term --cov-report xml"
+async-mode = "auto"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
